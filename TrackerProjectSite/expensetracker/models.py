@@ -26,17 +26,24 @@ EXPENSE_CATEGORY = [
 class Expense(models.Model):
     """
     Model that represents an expense class where each field represents a database field.
-
-    Attributes: 
-        date (date): The date of the transaction for the expense
-        item_description (str): The description of the transaction expense item
-        category_descr (str): The category description of the transaction expense item 
-        expense_amount (decimal): The amount for the expense transaction
     """
     date = models.DateField()
+    """
+    date: The date of the transaction for the expense
+    """
     item_description = models.CharField(max_length=100)
+    """
+    str: The description of the transaction expense item
+    """
     category_descr = models.CharField(max_length=50, choices=EXPENSE_CATEGORY)
+    """
+    str: The category description of the transaction expense item
+    """
+
     expense_amount = models.DecimalField(decimal_places=2, max_digits=9, default=0)
+    """
+    decimal: The amount for the expense transaction
+    """
 
     def __str__(self):
         return self.item_description
