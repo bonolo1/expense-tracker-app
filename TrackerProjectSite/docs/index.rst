@@ -11,6 +11,7 @@ Welcome to Expense Tracker's documentation!
    :caption: Contents:
 
    modules/models.rst
+   modules/views.rst
 
 Indices and tables
 ==================

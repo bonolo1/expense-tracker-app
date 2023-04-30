@@ -8,17 +8,40 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def home(request):
+    """
+    View function renders the home page
+
+    :param request: HTTP request made using url root
+
+    :returns: renders expensetracker/home.html as response
+    """
+
     return render(request, 'expensetracker/home.html')
 
-#Ref: https://www.w3schools.com/django/django_queryset_orderby.php
 @login_required (login_url='user_auth:login')
 def view_list(request):
+    """
+    View function renders the list of expenses
+
+    :param request: HTTP request made using url view_expense_list/
+
+    :returns: renders expensetracker/expense_list.html as response
+    """
     Expense_list = Expense.objects.all().order_by('date')
     context = {'Expense_list': Expense_list}
     return render (request, 'expensetracker/expense_list.html', context)
 
 @login_required (login_url='user_auth:login')
 def log_expense(request):
+    """
+    View function enables user to input expense transaction
+
+    :param request: HTTP request made using url log_expense/
+
+    :returns: redirects user to url view_expense_list/ as response if input is valid
+
+    :raises request: renders expensetracker/expense_input.html if input is invalid
+    """
     expense_form = CreateExpenseForm(request.POST)
     if request.method =='POST':
         expense_form = CreateExpenseForm(request.POST)
@@ -33,10 +56,15 @@ def log_expense(request):
 
 # Function to show the summary calculations of expenses tracked in different groups/views, including total expense, subtotals by categores
 # and by month
-# Ref source used to assist: https://www.youtube.com/watch?v=srs1jz0i73o, http://www.learningaboutelectronics.com/Articles/How-to-extract-the-year-from-a-DateTimeField-in-Django.php,
-# https://www.youtube.com/watch?v=qgJM6IwycY4, https://docs.djangoproject.com/en/4.1/ref/class-based-views/generic-date-based/
 @login_required (login_url='user_auth:login')
 def expense_calculations(request):
+    """
+    View function renders a summary of various expense transaction information
+
+    :param request: HTTP request made using url expense_summary/
+
+    :returns: renders expensetracker/expense_summary.html as response
+    """
     total_expense = Expense.objects.aggregate(Sum('expense_amount'))
 
     all_expense_objects = Expense.objects.all()

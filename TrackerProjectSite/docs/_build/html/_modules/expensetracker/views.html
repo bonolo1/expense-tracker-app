@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>expensetracker.views &mdash; Expense Tracker 1.0 documentation</title>
+      <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            Expense Tracker
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/models.html">Expense Model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../modules/views.html">Views</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Expense Tracker</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">expensetracker.views</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for expensetracker.views</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">django.shortcuts</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">get_object_or_404</span>
+<span class="kn">from</span> <span class="nn">.forms</span> <span class="kn">import</span> <span class="n">CreateExpenseForm</span>
+<span class="kn">from</span> <span class="nn">.models</span> <span class="kn">import</span> <span class="n">Expense</span>
+<span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Sum</span><span class="p">,</span> <span class="n">Count</span>
+<span class="kn">from</span> <span class="nn">django.db.models.functions</span> <span class="kn">import</span> <span class="n">TruncMonth</span><span class="p">,</span> <span class="n">TruncDate</span>
+<span class="kn">from</span> <span class="nn">django.contrib.auth.decorators</span> <span class="kn">import</span> <span class="n">login_required</span>
+
+<span class="c1"># Create your views here.</span>
+
+<div class="viewcode-block" id="home"><a class="viewcode-back" href="../../modules/views.html#expensetracker.views.home">[docs]</a><span class="k">def</span> <span class="nf">home</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function renders the home page</span>
+
+<span class="sd">    :param request: HTTP request made using url root</span>
+
+<span class="sd">    :returns: renders expensetracker/home.html as response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expensetracker/home.html&#39;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="view_list"><a class="viewcode-back" href="../../modules/views.html#expensetracker.views.view_list">[docs]</a><span class="nd">@login_required</span> <span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">view_list</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function renders the list of expenses</span>
+
+<span class="sd">    :param request: HTTP request made using url view_expense_list/</span>
+
+<span class="sd">    :returns: renders expensetracker/expense_list.html as response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">Expense_list</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Expense_list&#39;</span><span class="p">:</span> <span class="n">Expense_list</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span> <span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expensetracker/expense_list.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="log_expense"><a class="viewcode-back" href="../../modules/views.html#expensetracker.views.log_expense">[docs]</a><span class="nd">@login_required</span> <span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">log_expense</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function enables user to input expense transaction</span>
+
+<span class="sd">    :param request: HTTP request made using url log_expense/</span>
+
+<span class="sd">    :returns: redirects user to url view_expense_list/ as response if input is valid</span>
+
+<span class="sd">    :raises request: renders expensetracker/expense_input.html if input is invalid</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">expense_form</span> <span class="o">=</span> <span class="n">CreateExpenseForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">==</span><span class="s1">&#39;POST&#39;</span><span class="p">:</span>
+        <span class="n">expense_form</span> <span class="o">=</span> <span class="n">CreateExpenseForm</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">POST</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">expense_form</span><span class="o">.</span><span class="n">is_valid</span><span class="p">():</span>
+            <span class="n">expense_form</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="s1">&#39;expensetracker:view_list&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">expense_form</span> <span class="o">=</span> <span class="n">CreateExpenseForm</span><span class="p">()</span>
+    <span class="n">context</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;expense_form&#39;</span><span class="p">:</span> <span class="n">expense_form</span><span class="p">}</span>    
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expensetracker/expense_input.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+
+
+<span class="c1"># Function to show the summary calculations of expenses tracked in different groups/views, including total expense, subtotals by categores</span>
+<span class="c1"># and by month</span>
+<div class="viewcode-block" id="expense_calculations"><a class="viewcode-back" href="../../modules/views.html#expensetracker.views.expense_calculations">[docs]</a><span class="nd">@login_required</span> <span class="p">(</span><span class="n">login_url</span><span class="o">=</span><span class="s1">&#39;user_auth:login&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">expense_calculations</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    View function renders a summary of various expense transaction information</span>
+
+<span class="sd">    :param request: HTTP request made using url expense_summary/</span>
+
+<span class="sd">    :returns: renders expensetracker/expense_summary.html as response</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">total_expense</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">aggregate</span><span class="p">(</span><span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;expense_amount&#39;</span><span class="p">))</span>
+
+    <span class="n">all_expense_objects</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">total_expense_by_category</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;category_descr&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">category_totals</span><span class="o">=</span> <span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;expense_amount&#39;</span><span class="p">),</span> <span class="n">category_count_of_items_with_category</span><span class="o">=</span> <span class="n">Count</span><span class="p">(</span><span class="s1">&#39;category_descr&#39;</span><span class="p">))</span>
+
+    <span class="n">total_expense_by_month</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">month</span><span class="o">=</span><span class="n">TruncMonth</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;month&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">month_totals</span><span class="o">=</span> <span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;expense_amount&#39;</span><span class="p">))</span>
+
+    <span class="n">total_expense_by_day</span> <span class="o">=</span> <span class="n">Expense</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">values</span><span class="p">(</span><span class="s1">&#39;date&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">day_totals</span><span class="o">=</span> <span class="n">Sum</span><span class="p">(</span><span class="s1">&#39;expense_amount&#39;</span><span class="p">))</span>
+
+    <span class="n">context</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;total_expense&#39;</span><span class="p">:</span> <span class="n">total_expense</span><span class="p">[</span><span class="s1">&#39;expense_amount__sum&#39;</span><span class="p">],</span>
+            <span class="s1">&#39;total_expense_by_category&#39;</span><span class="p">:</span> <span class="n">total_expense_by_category</span><span class="p">,</span>
+            <span class="s1">&#39;all_expense_objects&#39;</span><span class="p">:</span> <span class="n">all_expense_objects</span><span class="p">,</span>
+            <span class="s1">&#39;total_expense_by_month&#39;</span><span class="p">:</span> <span class="n">total_expense_by_month</span><span class="p">,</span>
+            <span class="s1">&#39;total_expense_by_day&#39;</span><span class="p">:</span> <span class="n">total_expense_by_day</span>
+            <span class="p">}</span>
+    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;expensetracker/expense_summary.html&#39;</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2023, Bonolo Ramasedi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
