@@ -1,0 +1,70 @@
+<!--Page Shows Full List of Detailed Trasactions to Date-->
+{% extends 'expensetracker/header.html' %}
+
+{% block title %}
+Expense Transactions
+{% endblock %}
+
+{% block navbar %}
+<div class ="row">
+    <div class="col-12 pl-0 pr-0">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #bebebe;">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/log_expense/">Record Expenses</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/view_expense_list/">Expense Detail</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/expense_summary/">Expense Overview</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/user_auth/logout_user/">Logout</a>
+                </li>
+                 </li>       
+            <ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}  
+
+{% block header %}
+<div class="container">
+    <div class="text-center pt-5 pb-2">
+        <h1 class="display-6">Expense Transactions</h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<p class="text-center mb-4">The list of all of your historical expense transactions to date is as follows: </p>
+
+<table class="table table-bordered table-hover table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Transaction Date</th>
+            <th scope="col">Description</th>
+            <th scope="col">Category</th>
+            <th scope="col">Expense Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for expense in Expense_list %}
+        <tr>
+            <td>{{expense.date|date:"d F Y"}}</td>
+            <td>{{expense.item_description}}</td>
+            <td>{{expense.get_category_descr_display}}</td>
+            <td>R {{expense.expense_amount}}</td>
+        </tr>
+{% endfor %}
+</tbody>
+</table>
+
+<div class="text-center mt-4 mb-4">
+    <a class="btn btn-primary" href="http://127.0.0.1:8000/log_expense/" role="button">Record Expense</a>
+</div>
+{% endblock %}

@@ -1,0 +1,119 @@
+<!--Summary Overview of Transactions to Date Page-->
+{% extends 'expensetracker/header.html' %}
+
+{% block title %}
+Expense Overview
+{% endblock %}
+
+{% block navbar %}
+<div class ="row">
+    <div class="col-12 pl-0 pr-0">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #bebebe;">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/log_expense/">Record Expenses</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/view_expense_list/">Expense Detail</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/expense_summary/">Expense Overview</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/user_auth/logout_user/">Logout</a>
+                </li>
+                 </li>       
+            <ul>
+        </nav>
+    </div>
+</div>
+{% endblock %} 
+
+{% block header %}
+<div class="container">
+    <div class="text-center pt-5 pb-2">
+        <h1 class="display-6">Expense Overview Dashboard</h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<p class="text-center mb-4">The following is an overview summary of all of your expenses to date per category and across different views:</p>
+
+<h4>Total Expenses Incurred to Date</h4><br>
+<p>
+Total expenses incurred to date: R{{total_expense}}
+</p><br>
+
+<h4>Total Expenses By Category</h4><br>
+<!--Note: The reason for multiple for loops is to 1. Ensure that the category description is in human readable form, 2. To obtain the subtotal amounts per
+category, 3. reduce the result of repeating categories due to multiple expense items in the database having the same category description-->
+<table class="table table-bordered table-hover table-sm" style="table-layout: fixed;">
+    <thead>
+        <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Total Expense</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        <!--For loop to obtain the subtotal expense amounts for each category-->
+        {% for category_totals in total_expense_by_category %}
+            <!--For loop to loop through all objects in database to identify their categories (where these descriptions will be used in the final output in human readable form)-->
+            {% for category in all_expense_objects %}
+                <!--Loop through all objects where the category only appears once in the database (e.g. the category count total is 1) and show the human readable form in those instances -->
+                {% if category.category_descr == category_totals.category_descr and category_totals.category_count_of_items_with_category == 1 %}
+                    <td>{{category.get_category_descr_display}}
+                    <td>R {{category_totals.category_totals}}</td>
+                {% elif category_totals.category_count_of_items_with_category > 1 and category.category_descr == category_totals.category_descr %}
+                    <!--Where the category appears more than once and repeats (i.e. the category count is greater than 1, only loop through the an object witht the particular category once and don't loop if already looped through the same category)-->
+                    {% ifchanged %}
+                        <td>{{category.get_category_descr_display}}</td>
+                        <td>R {{category_totals.category_totals}}</td>
+                    {% endifchanged %}
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %} 
+    </tbody>
+</table><br>  
+
+<h4>Total Expenses By Month</h4><br>
+<table class="table table-bordered table-hover table-sm" style="table-layout: fixed;">
+    <thead>
+        <tr>
+            <th scope="col">Month</th>
+            <th scope="col">Total Expense</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for month in total_expense_by_month %}
+                <td>{{month.month|date:"F Y"}}</td>
+                <td>R {{month.month_totals}}</td>
+            </tr>
+            {% endfor %}
+    </tbody>
+</table><br>     
+
+<h4>Total Expenses By Day</h4><br>
+<table class="table table-bordered table-hover table-sm" style="table-layout: fixed;">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Total Expense</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for day in total_expense_by_day %}
+        <tr>
+            <td>{{day.date|date:"d F Y"}}</td>
+            <td>R {{day.day_totals}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table><br>
+{% endblock %}

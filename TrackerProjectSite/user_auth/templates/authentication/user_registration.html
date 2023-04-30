@@ -1,0 +1,74 @@
+<!--User Sign Up Page-->
+{% extends 'expensetracker/header.html' %}
+
+{% block title %}
+Sign Up
+{% endblock %}
+
+{% block navbar %}
+<div class ="row">
+    <div class="col-12 pl-0 pr-0">
+        <nav class="navbar navbar-expand-lg navbar-light"  style="background-color: #bebebe;">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/user_auth/">Login</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="http://127.0.0.1:8000/user_auth/register_user/">Sign Up</a>
+                </li>         
+            <ul>
+        </nav>
+    </div>
+</div>
+{% endblock %}  
+
+{% block header %}
+<div class="container">
+    <div class="text-center pt-5 pb-2">
+        <h1 class="display-6">Sign Up</h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <form class="site-form" action="{% url 'user_auth:register_user' %}" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{registration_form.first_name.label_tag}}
+                    {{registration_form.first_name}}
+                    {{registration_form.first_name.help_text}}
+                </div><br>
+                <div class="form-group">
+                    {{registration_form.email.label_tag}}
+                    {{registration_form.email}}
+                    {{registration_form.email.help_text}}
+                </div><br>
+                <div class="form-group">
+                    {{registration_form.username.label_tag}}
+                    {{registration_form.username}}<br>
+                    {{registration_form.username.help_text}}
+                </div><br>
+                <div class="form-group">
+                    {{registration_form.password1.label_tag}}
+                    {{registration_form.password1}}<br>
+                    {{registration_form.password1.help_text}}
+                </div><br>
+                <div class="form-group">
+                    {{registration_form.password2.label_tag}}
+                    {{registration_form.password2}}<br>
+                    {{registration_form.password2.help_text}}
+                </div><br>
+                <div class="text-center">
+                    <input type="submit" value="Register" class="btn btn-dark">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
