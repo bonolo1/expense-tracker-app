@@ -36,7 +36,7 @@ You can either use docker on your desktop or by using Docker Playground. Descrip
 
 1. If don't already have Docker installed on your desktop, install Docker on your desktop.
 
-2. Once installed,  enter the following command in the terminal:
+2. Once installed, enter the following command in the terminal:
 
 ```
 docker run -d -p 8000:8000 bonolor/expense-tracker-app
@@ -54,17 +54,19 @@ docker start <container id>
 
 1. Go to Docker Playground at the following link and enter "Start": https://labs.play-with-docker.com/.
 
-In the terminal, enter the following
+2. Add a new instance.
+  
+3. Enter the following command in the terminal:
 
 ```
 docker run -d -p 8000:8000 bonolor/expense-tracker-app
 ```
 
-2. Select the "8000" port link next to "Open Port".
+4. Select the "8000" port link next to "Open Port".
 
 **Stop Running**
 
-To stop running the application, obtain the container id:
+To stop running the application both when using Docker Playground and Docker on your desktop, obtain the container id by running the following command:
 
 ```
 docker ps -a
@@ -75,9 +77,6 @@ Stop running the container to stop running the app:
 ```
 docker stop <container id>
 ```
-
-2. Open your browser and enter either
-
 
 ### Virtual Environment
 
