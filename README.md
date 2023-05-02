@@ -10,6 +10,8 @@
 
 ## Project Description <a name="project_description"><a>
 
+The purpose of this expense tracker application is to enables users to manage their personal finances by keeping record of their spending and viewing the information in a way that is helpful for decision-making.
+
 This expense tracker app assists users to manage their day-to-day expenses, keep track of their total expenses and view expense overview summary of their expenses by different categories and views. Users can register to create an account and then login to get started with using the app.
 
 In particular, once logged in, users can:
@@ -22,25 +24,35 @@ In particular, once logged in, users can:
 
 There are two different ways to run the applications: using Docker or a virtual environment.
 
-1. Open your local Integrated Development Environment (IDE) such as VSCode
-2. On your IDE, open the terminal.
+Open your local Integrated Development Environment (IDE) such as VSCode.
+
+On your IDE, open the terminal.
 
 ### Docker
 
-You can either use docker on your desktop or using Docker Playground. Descriptions for using both options are included.
+You can either use docker on your desktop or by using Docker Playground. Descriptions for using both options are included.
 
-**Run using Desktop**
+**Run container using Desktop**
 
-If don't already have Docker installed on your desktop
+1. If don't already have Docker installed on your desktop, install Docker on your desktop.
 
-Install Docker on your desktop
+2. Once installed,  enter the following command in the terminal:
 
+```
+docker run -d -p 8000:8000 bonolor/expense-tracker-app
+```
 
-1. Enter the following command in the terminal to run the app's container on Docker hub:
+3. Open your web browser to view the expense tracker app, which can be done by entering "http://localhost:8000" or "http://127.0.0.1:8000/" on your browser.
 
-**Run using Docker Playground**
+Note: If you stop running the docker container following the "**Stop Running**" instructions below, the next time you would like to run the application again, you can enter the following command:
 
-Go to docker playground and enter "Start" at the following link: https://labs.play-with-docker.com/
+```
+docker start <container id>
+```
+
+**Run container using Docker Playground**
+
+1. Go to Docker Playground at the following link and enter "Start": https://labs.play-with-docker.com/.
 
 In the terminal, enter the following
 
@@ -48,22 +60,21 @@ In the terminal, enter the following
 docker run -d -p 8000:8000 bonolor/expense-tracker-app
 ```
 
-Select the "8000" port link next to "Open Port".
+2. Select the "8000" port link next to "Open Port".
 
 **Stop Running**
 
-To stop running, obtain the container id:
+To stop running the application, obtain the container id:
 
 ```
 docker ps -a
 ```
 
-Stop running the container
+Stop running the container to stop running the app:
 
 ```
 docker stop <container id>
 ```
-
 
 2. Open your browser and enter either
 
