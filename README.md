@@ -128,7 +128,7 @@ docker stop <container id>
  
  13. In the .env file created above, insert the key and debug mode in the file:
  
- SECRET_KEY=Key-generated-in-step-11  
+ SECRET_KEY=Key-generated-above  
  DEBUG=False  
   
   
@@ -175,7 +175,7 @@ docker stop <container id>
   
   <img width="700" alt="Screenshot 2023-05-02 at 20 09 51" src="https://user-images.githubusercontent.com/127111801/235752231-81bf0ec8-95b6-44ba-8059-d0b6f5f2a45b.png">
 
-  ### Log In
+  ### Login
   
   If you log out after signing up, you can log in either using the credentials you created when you registered or using the following credentials:
   
@@ -202,7 +202,7 @@ docker stop <container id>
   
   <img width="700" alt="Screenshot 2023-05-02 at 20 16 01" src="https://user-images.githubusercontent.com/127111801/235750941-ffd03d01-363d-44c9-afa7-7e3b6efb761a.png">
   
-   ### Log Out
+   ### Logout
    
    
    <img width="700" alt="Screenshot 2023-05-02 at 22 36 59" src="https://user-images.githubusercontent.com/127111801/235780598-5815bddf-027f-4925-94f6-5c85deebf5f0.png">
