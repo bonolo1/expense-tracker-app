@@ -47,15 +47,47 @@ docker run -d -p 8000:8000 bonolor/expense-tracker-app
 2. Open your browser and enter either
 
 
-### Virtual Environemt
+### Virtual Environment
 
-1. Download the file in the repository named the following: finance_calculator.py
-2. Create a project folder named finance_calculator.
-3. Move and save the downloaded files in the finance_calculator folder created.
+1. Download the folder in the repository named the following: TrackerProjectSite.
+ 
+3. Move and save the downloaded folder to the desired parent directory location.
+  
 4. Open your local Integrated Development Environment (IDE) such as VSCode.
-5. Add the finance_calculator folder to your IDE.
-6. Open the file named finance_calculator.py from the finance_calculator folder and run.
-7. Use the program in the IDE terminal (i.e. this is where you can input the data for the task manager and view output).
+ 
+5. Add the TrackerProjectSite folder to your IDE.
+ 
+6. In the same parent directory, create a virtual environment named .venv by entering the following command in the terminal:
+   
+  ```
+  python -m venv .venv
+  ```
+  
+7. Activate the virtual environment using the following command (for macOS):
+  
+  ```
+  source .venv/bin/activate
+  ```
+  
+8. Once the virtual environment is created and activated, enter the following command to move into the TrackerProjectSite directory:
+  
+  ```
+  cd TrackerProjectSite
+  ```
+ 
+9. Run the requirements.txt file to install all the relevant packages:
+  
+  ```
+  pip install -r requirements.txt
+  ```
+  
+10. Once all packages are installed, enter the following command to run the server and hence the expense tracker app:
+  
+  ```
+  python manage.py runserver
+  ```
+  
+  Open your web browser to view the expense tracker app, which can be done by entering "localhost:8000" or "http://127.0.0.1:8000/" on browser or following your preferred method for opening on browser based on your IDE.
 
   
 ## Usage <a name="usage"><a>
