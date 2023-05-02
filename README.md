@@ -22,7 +22,7 @@ In particular, once logged in, users can:
   
 ## Installation <a name="installation"><a> 
 
-There are two different ways to run the applications: using Docker or a virtual environment.
+There are two different ways to run the application: using Docker or a virtual environment.
 
 Open your local Integrated Development Environment (IDE) such as VSCode.
 
