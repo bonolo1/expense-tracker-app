@@ -40,9 +40,30 @@ Install Docker on your desktop
 
 **Run using Docker Playground**
 
+Go to docker playground and enter "Start" at the following link: https://labs.play-with-docker.com/
+
+In the terminal, enter the following
+
 ```
 docker run -d -p 8000:8000 bonolor/expense-tracker-app
 ```
+
+Select the "8000" port link next to "Open Port".
+
+**Stop Running**
+
+To stop running, obtain the container id:
+
+```
+docker ps -a
+```
+
+Stop running the container
+
+```
+docker stop <container id>
+```
+
 
 2. Open your browser and enter either
 
