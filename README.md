@@ -87,7 +87,7 @@ docker run -d -p 8000:8000 bonolor/expense-tracker-app
   python manage.py runserver
   ```
   
-  Open your web browser to view the expense tracker app, which can be done by entering "localhost:8000" or "http://127.0.0.1:8000/" on browser or following your preferred method for opening on browser based on your IDE.
+  Open your web browser to view the expense tracker app, which can be done by entering "http://localhost:8000" or "http://127.0.0.1:8000/" on browser or following your preferred method for opening on browser based on your IDE.
 
   
 ## Usage <a name="usage"><a>
