@@ -177,7 +177,7 @@ docker stop <container id>
 
   ### Login
   
-  If you log out after signing up, you can log in either using the credentials you created when you registered or using the following credentials:
+  If you log out after signing up, you can log back in either using the credentials you created when you registered or using the following credentials:
   
    **Username:** _ProjectUser1_  
    **Password:** _ShacjR97#_  
