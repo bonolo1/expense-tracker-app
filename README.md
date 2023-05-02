@@ -88,10 +88,10 @@ docker stop <container id>
  
 5. Add the TrackerProjectSite folder to your IDE.
  
-6. In the same parent directory, create a virtual environment named .venv by entering the following command in the terminal:
+6. In the same parent directory, create a virtual environment named .venv by entering the following command in the terminal (use relevant python version):
    
   ```
-  python -m venv .venv
+  python3.11 -m venv .venv
   ```
   
 7. Activate the virtual environment using the following command (for macOS):
@@ -100,7 +100,7 @@ docker stop <container id>
   source .venv/bin/activate
   ```
   
-8. Once the virtual environment is created and activated, enter the following command to move into the TrackerProjectSite directory:
+8. Once the virtual environment is created and activated, enter the following command to move into the TrackerProjectSite directory (if you are not already in the directory):
   
   ```
   cd TrackerProjectSite
@@ -112,7 +112,33 @@ docker stop <container id>
   pip install -r requirements.txt
   ```
   
-10. Once all packages are installed, enter the following command to run the server and hence the expense tracker application:
+10. If prompted to upgrade pip, enter:
+
+   ```
+  pip install --upgrade pip
+  ```
+  
+ 11. Once all packages are installed, add a file named _.env_ in the the parent TrackerProjectSite directory.
+
+ 12. Enter the following command in the terminal to generate a secret key:
+ 
+ ```
+ python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'
+ ```
+ 
+ 13. In the .env file created above, insert the key and debug mode in the file:
+ 
+ SECRET_KEY=Key-generated-in-step-11  
+ DEBUG=False  
+  
+  
+ 14. Make migrations:
+ 
+  ```
+ python manage.py migrate
+  ```
+ 
+ 15. Enter the following command  to run the server and hence the expense tracker application:
   
   ```
   python manage.py runserver
@@ -135,11 +161,11 @@ docker stop <container id>
   
   The following are example credentials you can also use if this is your first time creating an account:
   
-  **First Name:** _ProjectUser1_  
-  **Email:** projectuser1@gmailf.com  
-  **Username:** _ProjectUser1_  
-  **Password:** _ShacjR97#_  
-  **Confirm Password:** _ShacjR97#_ 
+  **First Name:** *ProjectUser1*  
+  **Email:** *projectuser1@gmailf.com*  
+  **Username:** *ProjectUser1*  
+  **Password:** *ShacjR97#*  
+  **Confirm Password:** *ShacjR97#* 
   
   This displays as:
   
@@ -175,6 +201,12 @@ docker stop <container id>
   View an overview summary of your expenses:
   
   <img width="700" alt="Screenshot 2023-05-02 at 20 16 01" src="https://user-images.githubusercontent.com/127111801/235750941-ffd03d01-363d-44c9-afa7-7e3b6efb761a.png">
+  
+   ### Log Out
+   
+   
+   <img width="700" alt="Screenshot 2023-05-02 at 22 36 59" src="https://user-images.githubusercontent.com/127111801/235780598-5815bddf-027f-4925-94f6-5c85deebf5f0.png">
+   
   
 ## Credit and Contribution <a name="credit_and_contribution"><a> 
 
