@@ -81,7 +81,7 @@ docker run -d -p 8000:8000 bonolor/expense-tracker-app
   pip install -r requirements.txt
   ```
   
-10. Once all packages are installed, enter the following command to run the server and hence the expense tracker app:
+10. Once all packages are installed, enter the following command to run the server and hence the expense tracker application:
   
   ```
   python manage.py runserver
