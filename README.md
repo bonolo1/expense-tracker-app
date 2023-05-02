@@ -124,6 +124,59 @@ docker stop <container id>
   
 ## Usage <a name="usage"><a>
   
+  ### Home
+  
+  Once you run the application successfully and open your web browser, the page will open to the following screen:
+ 
+  <img width="700" alt="Screenshot 2023-05-02 at 19 53 59" src="https://user-images.githubusercontent.com/127111801/235745933-86a30cec-f87f-4a77-89fc-65f314961e15.png">
+  
+   ### Sign Up
+  
+  Create an account on the sign up page using any desired credentials per the field labels.
+  
+  The following are example credentials you can also use if this is your first time creating an account:
+  
+  **First Name:** _ProjectUser1_  
+  **Email:** projectuser1@gmailf.com  
+  **Username:** _ProjectUser1_  
+  **Password:** _ShacjR97#_  
+  **Confirm Password:** _ShacjR97#_ 
+  
+  This displays as:
+  
+  <img width="700" alt="Screenshot 2023-05-02 at 20 09 01" src="https://user-images.githubusercontent.com/127111801/235751821-b644e0e1-27be-4252-8bef-3f2986eef6fc.png">
+
+  Once you register, you will automatically log in and be directed to the following screen:
+  
+  <img width="700" alt="Screenshot 2023-05-02 at 20 09 51" src="https://user-images.githubusercontent.com/127111801/235752231-81bf0ec8-95b6-44ba-8059-d0b6f5f2a45b.png">
+
+  ### Log In
+  
+  If you log out after signing up, you can log in either using the credentials you created when you registered or using the following credentials:
+  
+   **Username:** _ProjectUser1_  
+   **Password:** _ShacjR97#_  
+  
+ <img width="700" alt="Screenshot 2023-05-02 at 20 39 21" src="https://user-images.githubusercontent.com/127111801/235756105-64997ecf-dfa4-4001-bf56-14d4ddb37eab.png">
+  
+  ### Record Expense
+  
+  Record your expenses:
+  
+  <img width="700" alt="Screenshot 2023-05-02 at 20 12 08" src="https://user-images.githubusercontent.com/127111801/235750214-b19976d9-f691-4d6f-a1ef-20f353163d78.png">
+
+  ### Expense Detail
+  
+  View a detailed list of all the expense transactions to date:
+  
+  <img width="700" alt="Screenshot 2023-05-02 at 20 13 26" src="https://user-images.githubusercontent.com/127111801/235750512-a2a63ce2-9b1e-4c4d-ab91-417a55a7a34b.png">
+
+  ### Expense Overview
+  
+  View an overview summary of your expenses:
+  
+  <img width="700" alt="Screenshot 2023-05-02 at 20 16 01" src="https://user-images.githubusercontent.com/127111801/235750941-ffd03d01-363d-44c9-afa7-7e3b6efb761a.png">
+  
 ## Credit and Contribution <a name="credit_and_contribution"><a> 
 
 This project has been developed by Bonolo Ramasedi.
