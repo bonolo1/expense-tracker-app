@@ -10,7 +10,7 @@
 
 ## Project Description <a name="project_description"><a>
 
-The purpose of this expense tracker application is to enables users to manage their personal finances by keeping record of their spending and viewing the information in a way that is helpful for decision-making.
+The purpose of this expense tracker application is to enable users to manage their personal finances by keeping record of their spending and viewing the information in a way that is helpful for decision-making.
 
 This expense tracker app assists users to manage their day-to-day expenses, keep track of their total expenses and view expense overview summary of their expenses by different categories and views. Users can register to create an account and then login to get started with using the app.
 
