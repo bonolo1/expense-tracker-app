@@ -34,7 +34,7 @@ You can either use docker on your desktop or by using Docker Playground. Descrip
 
 **Run container using Desktop**
 
-1. If don't already have Docker installed on your desktop, install Docker on your desktop.
+1. If you don't already have Docker installed on your desktop, install Docker on your desktop.
 
 2. Once installed, enter the following command in the terminal:
 
